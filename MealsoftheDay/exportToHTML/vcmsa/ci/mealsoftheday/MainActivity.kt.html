@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>MainActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">vcmsa</span><span class="s2">.</span><span class="s1">ci</span><span class="s2">.</span><span class="s1">mealsoftheday</span>
+
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Button</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">EditText</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">TextView</span>
+<span class="s1">import android</span><span class="s2">.</span><span class="s1">widget</span><span class="s2">.</span><span class="s1">Toast</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">activity</span><span class="s2">.</span><span class="s1">enableEdgeToEdge</span>
+<span class="s1">import androidx</span><span class="s2">.</span><span class="s1">appcompat</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">AppCompatActivity</span>
+
+<span class="s0">class </span><span class="s1">MainActivity : AppCompatActivity</span><span class="s2">() {</span>
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState: Bundle?</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">)</span>
+        <span class="s1">enableEdgeToEdge</span><span class="s2">()</span>
+        <span class="s1">setContentView</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">activity_main</span><span class="s2">)</span>
+
+            <span class="s0">val </span><span class="s1">timeOfDayEditText: EditText </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">timeOfDayEditText</span><span class="s2">)</span>
+            <span class="s0">val </span><span class="s1">showMealButton: Button </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">showMealButton</span><span class="s2">)</span>
+            <span class="s0">val </span><span class="s1">resetButton: Button </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">resetButton</span><span class="s2">)</span>
+            <span class="s0">val </span><span class="s1">mealSuggestionsTextView: TextView </span><span class="s2">= </span><span class="s1">findViewById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">mealSuggestionsTextView</span><span class="s2">)</span>
+
+        <span class="s1">showMealButton</span><span class="s2">.</span><span class="s1">setOnClickListener </span><span class="s2">{</span>
+            <span class="s0">val </span><span class="s1">timeOfDay </span><span class="s2">= </span><span class="s1">timeOfDayEditText</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">()</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">timeOfDay</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+                <span class="s1">Toast</span><span class="s2">.</span><span class="s1">makeText</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s3">&quot;Please enter a time of day&quot;</span><span class="s2">, </span><span class="s1">Toast</span><span class="s2">.</span><span class="s1">LENGTH_SHORT</span><span class="s2">).</span><span class="s1">show</span><span class="s2">()</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s0">val </span><span class="s1">mealSuggestions </span><span class="s2">= </span><span class="s0">when </span><span class="s2">(</span><span class="s1">timeOfDay</span><span class="s2">.</span><span class="s1">lowercase</span><span class="s2">()) {</span>
+                    <span class="s3">&quot;morning&quot; </span><span class="s2">-&gt; {</span>
+                        <span class="s3">&quot;Breakfast: Oats with fruits and nuts</span><span class="s0">\n</span><span class="s3">Toast with avocado and eggs&quot;</span>
+                    <span class="s2">}</span>
+                    <span class="s3">&quot;mid-morning&quot; </span><span class="s2">-&gt; {</span>
+                        <span class="s3">&quot;Snack: Banana with honey</span><span class="s0">\n</span><span class="s3">Hummus and veggie sticks&quot;</span>
+                    <span class="s2">}</span>
+                    <span class="s3">&quot;afternoon&quot; </span><span class="s2">-&gt; {</span>
+                        <span class="s3">&quot;Lunch: Grilled Chicken salad with mixed greens</span><span class="s0">\n</span><span class="s3">Wrap with hummus and vegetables&quot;</span>
+                    <span class="s2">}</span>
+                    <span class="s3">&quot;mid-afternoon&quot; </span><span class="s2">-&gt; {</span>
+                        <span class="s3">&quot;Snack: Berry smoothie</span><span class="s0">\n</span><span class="s3">Low Fat chips&quot;</span>
+                    <span class="s2">}</span>
+                    <span class="s3">&quot;dinner&quot; </span><span class="s2">-&gt; {</span>
+                        <span class="s3">&quot;Dinner: Grilled Salmon with roasted vegetables</span><span class="s0">\n </span><span class="s3">Quinoa with avocado&quot;</span>
+                    <span class="s2">}</span>
+                    <span class="s3">&quot;after dinner&quot; </span><span class="s2">-&gt; {</span>
+                        <span class="s3">&quot;Dessert: Red Velvet Cake</span><span class="s0">\n</span><span class="s3">Fruit Mix&quot;</span>
+                    <span class="s2">}</span>
+                    <span class="s0">else </span><span class="s2">-&gt; {</span>
+                        <span class="s3">&quot;Invalid time of day. Please enter a valid time.&quot;</span>
+                    <span class="s2">}</span>
+                <span class="s2">}</span>
+
+                <span class="s1">mealSuggestionsTextView</span><span class="s2">.</span><span class="s1">text </span><span class="s2">= </span><span class="s1">mealSuggestions</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s1">resetButton</span><span class="s2">.</span><span class="s1">setOnClickListener </span><span class="s2">{</span>
+            <span class="s1">timeOfDayEditText</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">()</span>
+            <span class="s1">mealSuggestionsTextView</span><span class="s2">.</span><span class="s1">text </span><span class="s2">= </span><span class="s3">&quot;&quot;</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>
